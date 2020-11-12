@@ -25,6 +25,12 @@ let reservationsSchema = mongoose.Schema({
   adults: Number,
   children: Number,
   infants: Number,
-})
-  
-  
+});
+
+let Calendar = mongoose.model('Calendar', calendarSchema);
+let Reservation = mongoose.model('Reservation', reservationsSchema);
+
+module.exports = {
+    Calendar,
+    Reservation
+};
