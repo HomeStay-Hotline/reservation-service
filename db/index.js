@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/reservations');
 
-let calendarSchema = mongoose.Schema({
+let listingSchema = mongoose.Schema({
   listing_ID: {type: Number, unique: true},
   name: String,
   maxGuests: Number,
@@ -27,10 +27,10 @@ let reservationsSchema = mongoose.Schema({
   infants: Number,
 });
 
-let Calendar = mongoose.model('Calendar', calendarSchema);
+let Listing = mongoose.model('Calendar', calendarSchema);
 let Reservation = mongoose.model('Reservation', reservationsSchema);
 
 module.exports = {
-    Calendar,
+    Listing,
     Reservation
 };
