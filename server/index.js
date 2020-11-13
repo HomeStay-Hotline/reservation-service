@@ -13,7 +13,7 @@ app.use(parser.json());
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 app.get('/api/homes/:id/calendar', (req, res) => {
-  const id = req.params.id
+  const { id } = req.params;
 
   db.Listing.find({ listing_ID: id }, 'dates', (err, results) => {
     if (err) {
@@ -22,8 +22,8 @@ app.get('/api/homes/:id/calendar', (req, res) => {
     } else {
       res.send(results);
     }
-  })
-})
+  });
+});
 
 app.listen(port, () => {
   console.log(`Server running on http:localhost:${port}`);
