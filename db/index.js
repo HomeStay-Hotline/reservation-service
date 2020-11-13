@@ -1,23 +1,24 @@
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/reservations', { useNewUrlParser: true, useUnifiedTopology: true });
 
-let datesSchema = mongoose.Schema({
+const datesSchema = mongoose.Schema({
   date: String,
-  available: Boolean
+  available: Boolean,
 }, { _id: false });
 
-let listingSchema = mongoose.Schema({
-  listing_ID: {type: Number, unique: true},
+const listingSchema = mongoose.Schema({
+  listing_ID: { type: Number, unique: true },
   name: String,
   maxGuests: Number,
   minDays: Number,
   rate: Number,
   cleaningFee: Number,
   serviceFee: Number,
-  dates: [datesSchema]
+  dates: [datesSchema],
 });
 
-let reservationsSchema = mongoose.Schema({
+const reservationsSchema = mongoose.Schema({
   listing_ID: Number,
   check_in: String,
   check_out: String,
@@ -26,11 +27,11 @@ let reservationsSchema = mongoose.Schema({
   infants: Number,
 });
 
-let Listing = mongoose.model('Listing', listingSchema);
-let Reservation = mongoose.model('Reservation', reservationsSchema);
+const Listing = mongoose.model('Listing', listingSchema);
+const Reservation = mongoose.model('Reservation', reservationsSchema);
 
 module.exports = {
   mongoose,
   Listing,
-  Reservation
+  Reservation,
 };
