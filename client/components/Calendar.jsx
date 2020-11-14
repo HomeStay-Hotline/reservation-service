@@ -1,6 +1,6 @@
 import React from 'react';
 
-class App extends React.Component {
+class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,10 +11,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Hey lol from react
+        hey
       </div>
     );
   }
 }
 
-export default App;
+export default Calendar;
