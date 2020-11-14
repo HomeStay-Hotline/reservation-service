@@ -2,7 +2,9 @@ import React from 'react';
 
 const CalendarFooter = (props) => (
   <div className="footer">
-    <u>Clear dates</u>
+    <button type="submit">
+      <u>Clear dates</u>
+    </button>
   </div>
 );
 
