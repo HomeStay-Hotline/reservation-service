@@ -1,6 +1,7 @@
 import React from 'react';
 import CalendarHeader from './CalendarHeader';
 import CalendarBody from './CalendarBody';
+import CalendarFooter from './CalendarFooter';
 
 class Calendar extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Calendar extends React.Component {
       <div className="container">
         <CalendarHeader />
         <CalendarBody />
+        <CalendarFooter />
       </div>
     );
   }
