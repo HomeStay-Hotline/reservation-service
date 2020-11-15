@@ -1,19 +1,23 @@
 import React from 'react';
+import Month from './Month';
+import styles from '../../public/styles/calendar.css';
 
 class CalendarBody extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentMonths: [],
+    };
   }
 
   render() {
     return (
-      <div>
-        <div className="month">
-          Month 1
+      <div className={styles.body}>
+        <div>
+          <Month month="November 2020" left />
         </div>
-        <div className="month">
-          Month 2
+        <div>
+          <Month month="December 2020" left={false} />
         </div>
       </div>
     );
