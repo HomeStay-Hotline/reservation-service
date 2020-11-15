@@ -14,6 +14,10 @@ h3 {
     font-size: 15px;
 }
 
+.body {
+    display: flex;
+}
+
 .bodyRight {
     float: left;
 }
@@ -53,7 +57,7 @@ h3 {
 
 .footer {
     float: left;
-    margin-left: 560px;
+    margin-left: 600px;
 }
 
 .footer button {
