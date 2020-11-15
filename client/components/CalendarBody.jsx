@@ -6,18 +6,19 @@ class CalendarBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentMonths: [],
+      currentMonths: ['November 2020', 'December 2020'],
     };
   }
 
   render() {
+    const { currentMonths } = this.state;
     return (
       <div className={styles.body}>
         <div>
-          <Month month="November 2020" left />
+          <Month month={currentMonths[0]} left />
         </div>
         <div>
-          <Month month="December 2020" left={false} />
+          <Month month={currentMonths[1]} left={false} />
         </div>
       </div>
     );
