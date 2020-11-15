@@ -43,7 +43,7 @@ class Month extends React.Component {
               <td className="weekday Saturday">Sa</td>
             </tr>
             <tr className="week week1">
-              <td />
+              <td>1</td>
               <td>2</td>
               <td>3</td>
               <td>4</td>
@@ -91,7 +91,11 @@ class Month extends React.Component {
 
 Month.propTypes = {
   month: PropTypes.string.isRequired,
-  left: PropTypes.bool.isRequired,
+  left: PropTypes.bool,
+};
+
+Month.defaultProps = {
+  left: false,
 };
 
 export default Month;
