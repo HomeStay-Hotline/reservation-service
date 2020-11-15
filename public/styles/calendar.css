@@ -14,9 +14,13 @@ h3 {
     font-size: 15px;
 }
 
-.body {
-    display: flex;
-    
+.bodyRight {
+    float: left;
+}
+
+.bodyLeft {
+    float: left;
+    margin-right: 40px;
 }
 
 .monthHeaderLeft,
@@ -45,6 +49,11 @@ h3 {
     padding-right: 22px;
     padding-bottom: 1em;
     text-align: center;
+}
+
+.footer {
+    float: left;
+    margin-left: 560px;
 }
 
 .footer button {
