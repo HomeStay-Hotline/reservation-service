@@ -14,11 +14,11 @@ class CalendarBody extends React.Component {
     const { currentMonths } = this.state;
     return (
       <div className={styles.body}>
-        <div>
+        <div className={styles.bodyLeft}>
           <Month month={currentMonths[0]} left />
         </div>
-        <div>
-          <Month month={currentMonths[1]} left={false} />
+        <div className={styles.bodyRight}>
+          <Month month={currentMonths[1]} />
         </div>
       </div>
     );
