@@ -18,6 +18,17 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/i,
+        loader: 'style-loader',
+      },
+      {
+        test: /\.css$/i,
+        loader: 'css-loader',
+        options: {
+          modules: true,
+        },
+      },
     ],
   },
   mode: 'development',
