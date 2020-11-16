@@ -34,23 +34,36 @@ const makeDates = () => {
   return daylist.map((dt) => dt.toLocaleDateString('us-EN', options)).join('/');
 };
 
-// Returns an array of date objects containing the date and its availability
+// Returns an array of date objects containing the date (split into day of the week, month,
+// date, and year) and its availability
 // Sets availability as false if that day within the current month has already passed
 const makeAvailability = () => {
   const datesToAdd = [];
   const dates = makeDates().split('/');
   const currentMonth = new Date(Date.now()).getDate();
   for (let i = 0; i < currentMonth - 1; i += 1) {
-    datesToAdd.push(JSON.stringify({
-      date: dates[i],
+    const splitDate = dates[i].split(' ');
+    const dayOfWeek = splitDate[0].slice(0, -1);
+    const date = splitDate[2].slice(0, -1);
+    datesToAdd.push({
+      dayOfWeek,
+      month: splitDate[1],
+      date,
+      year: splitDate[3],
       available: false,
-    }));
+    });
   }
   for (let i = currentMonth - 1; i < dates.length - 1; i += 1) {
-    datesToAdd.push(JSON.stringify({
-      date: dates[i],
+    const splitDate = dates[i].split(' ');
+    const dayOfWeek = splitDate[0].slice(0, -1);
+    const date = splitDate[2].slice(0, -1);
+    datesToAdd.push({
+      dayOfWeek,
+      month: splitDate[1],
+      date,
+      year: splitDate[3],
       available: true,
-    }));
+    });
   }
   return datesToAdd;
 };
@@ -59,7 +72,7 @@ const makeAvailability = () => {
 const createListings = () => {
   const listings = [];
   const datesToAdd = makeAvailability();
-  for (let i = 0; i < 1; i += 1) {
+  for (let i = 0; i < 100; i += 1) {
     const rate = faker.random.number({ min: 30, max: 300 });
     const serviceFee = Math.floor(rate * 0.142);
     listings.push({
