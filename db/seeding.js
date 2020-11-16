@@ -18,7 +18,7 @@ const getDaysArray = (start, end) => {
   return arr;
 };
 
-// Returns an array of all dates (in 'DayOfWeek Month Day, Year' format)
+// Returns an array of all dates (in 'DayOfWeek, Month Day, Year' format)
 // between today and 365 days from now
 const makeDates = () => {
   const date = new Date();
