@@ -28,6 +28,7 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "jest-extended": "^0.11.5",
+    "lodash": "^4.17.20",
     "mongoose": "^5.10.13",
     "morgan": "^1.10.0",
     "prop-types": "^15.7.2",
