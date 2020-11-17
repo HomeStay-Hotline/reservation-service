@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import styles from '../../public/styles/CalendarMonth.css';
 
 // Dynamically renders a table of dates according to the month
-const makeDatesTable = (dates) => {
+const makeDatesTable = (dates, checkInClicked, handleCheckInSelect) => {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const weeks = [1, 2, 3, 4, 5];
   let currDate = 0;
   const startIndex = days.indexOf(dates[0].dayOfWeek);
   return (
@@ -13,64 +14,49 @@ const makeDatesTable = (dates) => {
       <tr>
         {days.map((day) => <td>{day.slice(0, 2)}</td>)}
       </tr>
-      <tr>
-        {/* Week 1 */}
-        {days.map((day, index) => {
-          if (index < startIndex) {
-            return <td />;
-          }
-          if (!dates[currDate].available) {
-            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
-          }
-          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
-        })}
-      </tr>
-      <tr>
-        {/* Week 2 */}
-        {days.map(() => {
-          if (!dates[currDate].available) {
-            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
-          }
-          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
-        })}
-      </tr>
-      <tr>
-        {/* Week 3 */}
-        {days.map(() => {
-          if (!dates[currDate].available) {
-            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
-          }
-          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
-        })}
-      </tr>
-      <tr>
-        {/* Week 4 */}
-        {days.map(() => {
-          if (!dates[currDate].available) {
-            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
-          }
-          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
-        })}
-      </tr>
-      <tr>
-        {/* Week 5 (if applicable *cough February cough*) */}
-        {days.map(() => {
-          if (dates[currDate]) {
-            if (!dates[currDate].available) {
-              return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
+      {weeks.map((week, wkIndex) => (
+        <tr>
+          {days.map((day, dyIndex) => {
+            if ((dyIndex < startIndex && wkIndex === 0) || !dates[currDate]) {
+              return <td />;
             }
-            return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
-          }
-          return <td />;
-        })}
-      </tr>
+            if (!dates[currDate].available) {
+              return (
+                <td>
+                  <button
+                    className={styles.notAvailable}
+                    type="submit"
+                    disabled
+                  >
+                    {dates[currDate++].date}
+                  </button>
+                </td>
+              );
+            }
+            const date = dates[currDate];
+            return (
+              <td>
+                <button
+                  className={styles.available}
+                  type="submit"
+                  onClick={() => {
+                    handleCheckInSelect(date);
+                  }}
+                >
+                  {dates[currDate++].date}
+                </button>
+              </td>
+            );
+          })}
+        </tr>
+      ))}
     </tbody>
   );
 };
 
 const Month = (props) => {
-  const { monthArr, left } = props;
-  useEffect(() => {}, [monthArr]);
+  const { monthArr, checkInClicked, left, handleCheckInSelect } = props;
+  useEffect(() => {}, [monthArr, checkInClicked]);
   if (monthArr.length === 0) {
     return <div>Loading...</div>;
   }
@@ -95,7 +81,7 @@ const Month = (props) => {
     <div className={styles.monthContainer}>
       {monthHeader}
       <table>
-        {makeDatesTable(monthArr)}
+        {makeDatesTable(monthArr, checkInClicked, handleCheckInSelect)}
       </table>
     </div>
   );
@@ -110,10 +96,13 @@ Month.propTypes = {
     available: PropTypes.bool.isRequired,
   })),
   left: PropTypes.bool,
+  checkInClicked: PropTypes.bool,
+  handleCheckInSelect: PropTypes.func.isRequired,
 };
 
 Month.defaultProps = {
   monthArr: [],
+  checkInClicked: false,
   left: false,
 };
 
