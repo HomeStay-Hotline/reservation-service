@@ -1,0 +1,12 @@
+.body {
+    display: flex;
+}
+
+.bodyRight {
+    float: left;
+}
+
+.bodyLeft {
+    float: left;
+    margin-right: 40px;
+}

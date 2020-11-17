@@ -1,6 +1,7 @@
 .header,
 .body, 
-.footer {  
+.footer,
+td {  
     font-family: "Montserrat", sans-serif;
 }
 
@@ -14,50 +15,9 @@ h3 {
     font-size: 15px;
 }
 
-.body {
-    display: flex;
-}
-
-.bodyRight {
-    float: left;
-}
-
-.bodyLeft {
-    float: left;
-    margin-right: 40px;
-}
-
-.monthHeaderLeft,
-.monthHeaderRight {
-    margin-bottom: 10px;
-}
-
-.monthHeaderLeft button,
-.monthHeaderRight button {
-    background: none !important;
-    border: none;
-    padding: 0 !important;
-    cursor: pointer;
-    margin-left: 7px;
-}
-
-.monthHeaderLeft span {
-    margin-right: 75px;
-}
-
-.monthHeaderRight span {
-    margin-left: 75px;
-}
-
-.monthBody td {
-    padding-right: 22px;
-    padding-bottom: 1em;
-    text-align: center;
-}
-
 .footer {
     float: left;
-    margin-left: 600px;
+    margin-left: 725px;
 }
 
 .footer button {
