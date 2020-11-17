@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CalendarBody from './CalendarBody';
-import styles from '../../public/styles/calendar.css';
+import styles from '../../public/styles/Calendar.css';
 
 const Calendar = () => {
   const [dates, setDates] = useState([]);
