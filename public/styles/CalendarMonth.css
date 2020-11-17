@@ -43,3 +43,12 @@
 .notAvailable {
     text-decoration: line-through;
 }
+
+.checkIn {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 50%;
+    color: white;
+}
