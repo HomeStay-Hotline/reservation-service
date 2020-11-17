@@ -15,9 +15,9 @@ app.use(express.static(path.resolve(__dirname, '..', 'public')));
 app.get('/api/homes/:id/calendar', (req, res) => {
   const { id } = req.params;
 
-  db.Listing.find({ listing_ID: id }, 'dates', (err, results) => {
+  db.Listing.find({ listing_ID: id }, (err, results) => {
     if (err) {
-      console.log('Failed to fetch dates from the database: ', err);
+      console.log('Failed to fetch info from the database: ', err);
       res.sendStatus(500);
     } else {
       res.send(results);
