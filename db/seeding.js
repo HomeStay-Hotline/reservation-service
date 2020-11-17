@@ -18,30 +18,50 @@ const getDaysArray = (start, end) => {
   return arr;
 };
 
-// Returns an array of all dates (in 'YYYY-MM-DD' format) between today and 364 days from now
+// Returns an array of all dates (in 'DayOfWeek, Month Day, Year' format)
+// between today and 365 days from now
 const makeDates = () => {
   const date = new Date();
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   const lastDay = addDays(firstDay, 365);
   const daylist = getDaysArray(firstDay, lastDay);
-  return daylist.map((dt) => dt.toISOString().slice(0, 10)).join(' ');
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  return daylist.map((dt) => dt.toLocaleDateString('us-EN', options)).join('/');
 };
 
-// Returns an array of date objects containing the date ('YYYY-MM-DD' format) and its availability
+// Returns an array of date objects containing the date (split into day of the week, month,
+// date, and year) and its availability
 // Sets availability as false if that day within the current month has already passed
 const makeAvailability = () => {
   const datesToAdd = [];
-  const dates = makeDates().split(' ');
-  const dateOfTheMonth = new Date(Date.now()).getDate();
-  for (let i = 0; i < dateOfTheMonth - 1; i += 1) {
+  const dates = makeDates().split('/');
+  const currentMonth = new Date(Date.now()).getDate();
+  for (let i = 0; i < currentMonth - 1; i += 1) {
+    const splitDate = dates[i].split(' ');
+    const dayOfWeek = splitDate[0].slice(0, -1);
+    const date = splitDate[2].slice(0, -1);
     datesToAdd.push({
-      date: dates[i],
+      dayOfWeek,
+      month: splitDate[1],
+      date,
+      year: splitDate[3],
       available: false,
     });
   }
-  for (let i = dateOfTheMonth - 1; i < dates.length - 1; i += 1) {
+  for (let i = currentMonth - 1; i < dates.length - 1; i += 1) {
+    const splitDate = dates[i].split(' ');
+    const dayOfWeek = splitDate[0].slice(0, -1);
+    const date = splitDate[2].slice(0, -1);
     datesToAdd.push({
-      date: dates[i],
+      dayOfWeek,
+      month: splitDate[1],
+      date,
+      year: splitDate[3],
       available: true,
     });
   }

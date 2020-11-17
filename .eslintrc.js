@@ -17,10 +17,12 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-console': 'off',
   },
   env: {
     browser: true,
     es2021: true,
-    "jest/globals": true,
+    jest: true,
   },
 };
