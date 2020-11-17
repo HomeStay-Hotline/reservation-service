@@ -71,7 +71,6 @@ const makeDatesTable = (dates) => {
 const Month = (props) => {
   const { monthArr, left } = props;
   useEffect(() => {}, [monthArr]);
-  console.log(monthArr);
   if (monthArr.length === 0) {
     return <div>Loading...</div>;
   }
