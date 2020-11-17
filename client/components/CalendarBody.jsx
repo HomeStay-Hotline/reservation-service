@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Month from './Month';
-import styles from '../../public/styles/calendar.css';
+import styles from '../../public/styles/CalendarBody.css';
 
 const CalendarBody = (props) => {
   const { dates } = props;
