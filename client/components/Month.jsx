@@ -1,7 +1,9 @@
+/* eslint-disable no-plusplus */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../public/styles/calendar.css';
+import styles from '../../public/styles/CalendarMonth.css';
 
+// Dynamically renders a table of dates according to the month
 const makeDatesTable = (dates) => {
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let currDate = 0;
@@ -17,26 +19,47 @@ const makeDatesTable = (dates) => {
           if (index < startIndex) {
             return <td />;
           }
-          return <td>{dates[currDate++].date}</td>;
+          if (!dates[currDate].available) {
+            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
+          }
+          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
         })}
       </tr>
       <tr>
         {/* Week 2 */}
-        {days.map(() => <td>{dates[currDate++].date}</td>)}
+        {days.map(() => {
+          if (!dates[currDate].available) {
+            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
+          }
+          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
+        })}
       </tr>
       <tr>
         {/* Week 3 */}
-        {days.map(() => <td>{dates[currDate++].date}</td>)}
+        {days.map(() => {
+          if (!dates[currDate].available) {
+            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
+          }
+          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
+        })}
       </tr>
       <tr>
         {/* Week 4 */}
-        {days.map(() => <td>{dates[currDate++].date}</td>)}
+        {days.map(() => {
+          if (!dates[currDate].available) {
+            return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
+          }
+          return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
+        })}
       </tr>
       <tr>
         {/* Week 5 (if applicable *cough February cough*) */}
         {days.map(() => {
           if (dates[currDate]) {
-            return <td>{dates[currDate++].date}</td>;
+            if (!dates[currDate].available) {
+              return <td><button className={styles.notAvailable} type="submit" disabled>{dates[currDate++].date}</button></td>;
+            }
+            return <td><button className={styles.available} type="submit">{dates[currDate++].date}</button></td>;
           }
           return <td />;
         })}
