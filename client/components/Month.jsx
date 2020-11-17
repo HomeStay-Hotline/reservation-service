@@ -14,12 +14,17 @@ const makeDatesTable = (dates, checkInClicked, handleCheckInSelect) => {
       <tr>
         {days.map((day) => <td>{day.slice(0, 2)}</td>)}
       </tr>
+      {/* for each week */}
       {weeks.map((week, wkIndex) => (
         <tr>
-          {days.map((day, dyIndex) => {
-            if ((dyIndex < startIndex && wkIndex === 0) || !dates[currDate]) {
+          {/* for each day of the week */}
+          {days.map((day, dayIndex) => {
+            // if the current week is week 1 AND the dayIndex is less than the startIndex,
+            // OR dates at the currDate index is undefined
+            if ((dayIndex < startIndex && wkIndex === 0) || !dates[currDate]) {
               return <td />;
             }
+            // if dates at the currDate is unavailable
             if (!dates[currDate].available) {
               return (
                 <td>
