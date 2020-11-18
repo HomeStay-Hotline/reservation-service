@@ -3,6 +3,7 @@
     border: 0.5px solid #dddddd;
     background-color: white;
     width: 35%;
+    box-shadow: 0 0 10px #e2e2e2;
 }
 
 h1 {
@@ -14,8 +15,21 @@ h3 {
 }
 
 .header,
-.ratePerNight {
+.ratePerNight,
+.reviews {
     display: flex;
+}
+
+.reviews {
+    padding-right: 35px;
+}
+
+.reviews span {
+    margin: 5px;
+}
+
+.header {
+    justify-content: space-between;
 }
 
 .rate,
@@ -29,5 +43,10 @@ h3 {
 
 .night {
     padding-top: 2px;
+}
+
+.icon {
+    color: red;
+    padding-top: 17px;
 }
 
