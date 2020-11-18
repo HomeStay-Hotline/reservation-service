@@ -105,3 +105,24 @@ label {
     font-weight: 600;
     font-size: 10px;
 }
+
+.btn {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 345px;
+}
+
+.reserve {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12pt;
+    font-weight: 600;
+    background: linear-gradient(0.25turn, #e32352, #d61367);
+    color: white;
+    height: 50px;
+    width: 100%;
+    padding-right: 10px;
+    border: none;
+    border-radius: 5px;
+}
