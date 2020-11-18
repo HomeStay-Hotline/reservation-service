@@ -4,10 +4,18 @@ import Month from './Month';
 import styles from '../../public/styles/CalendarBody.css';
 
 const CalendarBody = (props) => {
-  const { dates, checkInDate, checkInClicked, listing, handleCheckInSelect } = props;
+  const {
+    dates,
+    checkInDate,
+    checkInClicked,
+    checkOutDate,
+    checkOutClicked,
+    listing,
+    handleCheckInSelect,
+    handleCheckOutSelect,
+  } = props;
   // const handleLeftRightToggle = () => null;
   useEffect(() => {}, [checkInDate]);
-  console.log('Check in date from inside body: ', checkInDate);
   return (
     <div className={styles.body}>
       <div className={styles.bodyLeft}>
@@ -16,8 +24,11 @@ const CalendarBody = (props) => {
           listing={listing}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
+          checkOutDate={checkOutDate}
+          checkOutClicked={checkOutClicked}
           left
           handleCheckInSelect={handleCheckInSelect}
+          handleCheckOutSelect={handleCheckOutSelect}
         />
       </div>
       <div className={styles.bodyRight}>
@@ -26,7 +37,10 @@ const CalendarBody = (props) => {
           listing={listing}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
+          checkOutDate={checkOutDate}
+          checkOutClicked={checkOutClicked}
           handleCheckInSelect={handleCheckInSelect}
+          handleCheckOutSelect={handleCheckOutSelect}
         />
       </div>
     </div>
@@ -49,6 +63,7 @@ CalendarBody.propTypes = {
     year: PropTypes.string,
     available: PropTypes.bool,
   }),
+  checkOutClicked: PropTypes.bool,
   checkOutDate: PropTypes.shape({
     dayOfWeek: PropTypes.string,
     month: PropTypes.string,
@@ -65,14 +80,18 @@ CalendarBody.propTypes = {
     cleaningFee: PropTypes.number,
     serviceFee: PropTypes.number,
   }),
-  handleCheckInSelect: PropTypes.func.isRequired,
+  handleCheckInSelect: PropTypes.func,
+  handleCheckOutSelect: PropTypes.func,
 };
 
 CalendarBody.defaultProps = {
   listing: {},
   checkInClicked: false,
   checkInDate: {},
+  checkOutClicked: false,
   checkOutDate: {},
+  handleCheckInSelect: null,
+  handleCheckOutSelect: null,
 };
 
 export default CalendarBody;

@@ -5,15 +5,53 @@ import _ from 'lodash';
 import styles from '../../public/styles/CalendarMonth.css';
 
 const Month = (props) => {
-  const { monthArr, checkInClicked, checkInDate, listing, left, handleCheckInSelect } = props;
+  const {
+    monthArr,
+    checkInDate,
+    checkInClicked,
+    checkOutDate,
+    checkOutClicked,
+    listing,
+    left,
+    handleCheckInSelect,
+    handleCheckOutSelect,
+  } = props;
 
   useEffect(() => {}, [monthArr, checkInClicked]);
 
+  const tdTemplate = (style, isDisabled, onClick, date) => {
+    if (isDisabled) {
+      return (
+        <td>
+          <button
+            className={style}
+            type="submit"
+            disabled
+          >
+            {date.date}
+          </button>
+        </td>
+      );
+    }
+    return (
+      <td>
+        <button
+          className={style}
+          type="submit"
+          onClick={() => {
+            onClick(date);
+          }}
+        >
+          {date.date}
+        </button>
+      </td>
+    );
+  };
+
   // Dynamically renders a table of dates according to the month
   const makeDatesTable = (dates) => {
-    const months = ['November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'];
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const weeks = [1, 2, 3, 4, 5];
+    const weeks = [1, 2, 3, 4, 5, 6];
     let currDate = 0;
     const startIndex = days.indexOf(dates[0].dayOfWeek);
     return (
@@ -26,71 +64,47 @@ const Month = (props) => {
           <tr>
             {/* for each day of the week */}
             {days.map((day, dayIndex) => {
-            // if the current week is week 1 AND the dayIndex is less than the startIndex,
-            // OR dates at the currDate index is undefined
+              const date = dates[currDate];
+              // if the current week is week 1 AND the dayIndex is less than the startIndex,
+              // OR dates at the currDate index is undefined
               if ((dayIndex < startIndex && wkIndex === 0) || !dates[currDate]) {
                 return <td />;
               }
               // if dates at the currDate is unavailable
               if (!dates[currDate].available) {
-                return (
-                  <td>
-                    <button
-                      className={styles.notAvailable}
-                      type="submit"
-                      disabled
-                    >
-                      {dates[currDate++].date}
-                    </button>
-                  </td>
-                );
+                return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
               }
-              const date = dates[currDate];
+              const dateNumber = parseInt(date.date, 10);
+              // const minStayDate = parseInt(date.date, 10) + listing.minDays;
+              const checkInDateNum = parseInt(checkInDate.date, 10);
               if (checkInClicked) {
                 // if the current date is behind the checkInDate, disable the button
                 // (can't select a checkout date that's in the past)
-                const dateNumber = parseInt(date.date, 10);
                 if ((date.month === checkInDate.month
-                    && dateNumber < parseInt(checkInDate.date, 10))
+                    && dateNumber < checkInDateNum)
                     || (date.month !== checkInDate.month && left)) {
-                  return (
-                    <td>
-                      <button
-                        className={styles.notAvailable}
-                        type="submit"
-                        disabled
-                      >
-                        {dates[currDate++].date}
-                      </button>
-                    </td>
-                  );
+                  return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkInDate)) {
-                  return (
-                    <td>
-                      <button
-                        className={styles.checkIn}
-                        type="submit"
-                      >
-                        {dates[currDate++].date}
-                      </button>
-                    </td>
-                  );
+                  return tdTemplate(styles.checkIn, false, null, dates[currDate++]);
                 }
+                return tdTemplate(styles.available, false, handleCheckOutSelect, dates[currDate++]);
               }
-              return (
-                <td>
-                  <button
-                    className={styles.available}
-                    type="submit"
-                    onClick={() => {
-                      handleCheckInSelect(date);
-                    }}
-                  >
-                    {dates[currDate++].date}
-                  </button>
-                </td>
-              );
+              if (checkOutClicked) {
+                if ((date.month === checkInDate.month
+                  && dateNumber < checkInDateNum)
+                  || (date.month !== checkInDate.month && left)) {
+                  return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                }
+                if (_.isEqual(dates[currDate], checkInDate)) {
+                  return tdTemplate(styles.checkIn, false, null, dates[currDate++]);
+                }
+                if (_.isEqual(dates[currDate], checkOutDate)) {
+                  return tdTemplate(styles.checkOut, false, null, dates[currDate++]);
+                }
+                return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+              }
+              return tdTemplate(styles.available, false, handleCheckInSelect, dates[currDate++]);
             })}
           </tr>
         ))}
@@ -101,7 +115,6 @@ const Month = (props) => {
   if (monthArr.length === 0) {
     return <div>Loading...</div>;
   }
-  console.log(`Check in date inside ${monthArr[0].month}: `, checkInDate);
   const monthHeader = left
     ? (
       <div className={styles.monthHeaderLeft}>
@@ -145,6 +158,7 @@ Month.propTypes = {
     year: PropTypes.string,
     available: PropTypes.bool,
   }),
+  checkOutClicked: PropTypes.bool,
   checkOutDate: PropTypes.shape({
     dayOfWeek: PropTypes.string,
     month: PropTypes.string,
@@ -162,7 +176,8 @@ Month.propTypes = {
     serviceFee: PropTypes.number,
   }),
   left: PropTypes.bool,
-  handleCheckInSelect: PropTypes.func.isRequired,
+  handleCheckInSelect: PropTypes.func,
+  handleCheckOutSelect: PropTypes.func,
 };
 
 Month.defaultProps = {
@@ -170,8 +185,11 @@ Month.defaultProps = {
   listing: {},
   checkInClicked: false,
   checkInDate: {},
+  checkOutClicked: false,
   checkOutDate: {},
   left: false,
+  handleCheckInSelect: null,
+  handleCheckOutSelect: null,
 };
 
 export default Month;

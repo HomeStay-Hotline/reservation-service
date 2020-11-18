@@ -8,7 +8,9 @@ const Calendar = () => {
   const [listing, setListing] = useState({});
   const [dates, setDates] = useState([]);
   const [checkInDate, setCheckInDate] = useState({});
-  const [checkInClicked, setcheckInClicked] = useState(false);
+  const [checkInClicked, setCheckInClicked] = useState(false);
+  const [checkOutDate, setCheckOutDate] = useState({});
+  const [checkOutClicked, setCheckOutClicked] = useState(false);
 
   // fetch dates data from the server
   // empty array as 2nd arg stops fetch from infinite loop
@@ -22,7 +24,6 @@ const Calendar = () => {
         }
         setDates(monthsWithDates);
         delete data[0].dates;
-        console.log(data[0]);
         setListing(data[0]);
       })
       .catch((err) => {
@@ -31,13 +32,19 @@ const Calendar = () => {
   }, []);
 
   const clearDates = () => {
-    console.log('Clearing dates...');
+    setCheckInClicked(false);
+    setCheckOutClicked(false);
   };
 
   const handleCheckInSelect = (date) => {
-    console.log('Check-in date selected!', date);
-    setcheckInClicked(true);
     setCheckInDate(date);
+    setCheckInClicked(true);
+  };
+
+  const handleCheckOutSelect = (date) => {
+    setCheckInClicked(false);
+    setCheckOutDate(date);
+    setCheckOutClicked(true);
   };
 
   if (checkInClicked) {
@@ -58,7 +65,49 @@ const Calendar = () => {
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
           listing={listing}
-          handleCheckInSelect={handleCheckInSelect}
+          handleCheckOutSelect={handleCheckOutSelect}
+        />
+        <div className={styles.footer}>
+          <button type="submit" onClick={clearDates}>Clear dates</button>
+        </div>
+      </div>
+    );
+  }
+  if (checkOutClicked) {
+    const checkInStr = `${checkInDate.month} ${checkInDate.date} ${checkInDate.year}`;
+    const checkOutStr = `${checkOutDate.month} ${checkOutDate.date} ${checkOutDate.year}`;
+    const dayDiff = Math.floor((Date.parse(checkOutStr) - Date.parse(checkInStr)) / 86400000);
+    return (
+      <div className="container">
+        <div className={styles.header}>
+          <h1>
+            {dayDiff}
+            {' '}
+            nights in
+            {' '}
+            {listing.name}
+          </h1>
+          <h3>
+            {checkInDate.month.slice(0, 3)}
+            {' '}
+            {checkInDate.date}
+            {', '}
+            {checkInDate.year}
+            {' - '}
+            {checkOutDate.month.slice(0, 3)}
+            {' '}
+            {checkOutDate.date}
+            {', '}
+            {checkOutDate.year}
+          </h3>
+        </div>
+        <CalendarBody
+          dates={dates}
+          checkInDate={checkInDate}
+          checkInClicked={checkInClicked}
+          checkOutDate={checkOutDate}
+          checkOutClicked={checkOutClicked}
+          listing={listing}
         />
         <div className={styles.footer}>
           <button type="submit" onClick={clearDates}>Clear dates</button>
