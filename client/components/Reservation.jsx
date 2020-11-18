@@ -31,6 +31,11 @@ const Reservation = () => {
     <div className={styles.container}>
       <ReservationHeader rate={listing.rate} />
       <ReservationForm handleGuestSelectClick={handleGuestSelectClick} />
+      <div className={styles.btn}>
+        <button type="submit" className={styles.reserve}>
+          Check availability
+        </button>
+      </div>
     </div>
   );
 };
