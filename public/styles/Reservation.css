@@ -1,0 +1,33 @@
+.container {
+    font-family: "Montserrat", sans-serif;
+    border: 0.5px solid #dddddd;
+    background-color: white;
+    width: 35%;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+.header,
+.ratePerNight {
+    display: flex;
+}
+
+.rate,
+.night {
+    margin: 3px;
+}
+
+.rate {
+    padding-left: 35px;
+}
+
+.night {
+    padding-top: 2px;
+}
+
