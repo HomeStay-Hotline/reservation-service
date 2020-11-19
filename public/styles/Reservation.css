@@ -123,7 +123,8 @@ label {
 
 .arrowDown {
     padding-right: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
+    font-size: 16pt;
     cursor: pointer;
 }
 
@@ -144,6 +145,8 @@ label {
     height: 50px;
     width: 100%;
     padding-right: 10px;
+    outline: none;
+    cursor: pointer;
     border: none;
     border-radius: 5px;
 }
