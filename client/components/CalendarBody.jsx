@@ -10,7 +10,6 @@ const CalendarBody = (props) => {
     checkInClicked,
     checkOutDate,
     checkOutClicked,
-    listing,
     handleCheckInSelect,
     handleCheckOutSelect,
   } = props;
@@ -21,7 +20,6 @@ const CalendarBody = (props) => {
       <div className={styles.bodyLeft}>
         <Month
           monthArr={dates[0]}
-          listing={listing}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
           checkOutDate={checkOutDate}
@@ -34,7 +32,6 @@ const CalendarBody = (props) => {
       <div className={styles.bodyRight}>
         <Month
           monthArr={dates[1]}
-          listing={listing}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
           checkOutDate={checkOutDate}
@@ -71,21 +68,11 @@ CalendarBody.propTypes = {
     year: PropTypes.string,
     available: PropTypes.bool,
   }),
-  listing: PropTypes.shape({
-    listing_ID: PropTypes.number,
-    name: PropTypes.string,
-    maxGuests: PropTypes.number,
-    minDays: PropTypes.number,
-    rate: PropTypes.number,
-    cleaningFee: PropTypes.number,
-    serviceFee: PropTypes.number,
-  }),
   handleCheckInSelect: PropTypes.func,
   handleCheckOutSelect: PropTypes.func,
 };
 
 CalendarBody.defaultProps = {
-  listing: {},
   checkInClicked: false,
   checkInDate: {},
   checkOutClicked: false,

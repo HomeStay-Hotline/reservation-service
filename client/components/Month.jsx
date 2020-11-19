@@ -11,7 +11,6 @@ const Month = (props) => {
     checkInClicked,
     checkOutDate,
     checkOutClicked,
-    listing,
     left,
     handleCheckInSelect,
     handleCheckOutSelect,
@@ -22,9 +21,8 @@ const Month = (props) => {
   const tdTemplate = (style, isDisabled, onClick, date) => {
     if (isDisabled) {
       return (
-        <td>
+        <td className={style}>
           <button
-            className={style}
             type="submit"
             disabled
           >
@@ -34,9 +32,8 @@ const Month = (props) => {
       );
     }
     return (
-      <td>
+      <td className={style}>
         <button
-          className={style}
           type="submit"
           onClick={() => {
             onClick(date);
@@ -166,15 +163,6 @@ Month.propTypes = {
     year: PropTypes.string,
     available: PropTypes.bool,
   }),
-  listing: PropTypes.shape({
-    listing_ID: PropTypes.number,
-    name: PropTypes.string,
-    maxGuests: PropTypes.number,
-    minDays: PropTypes.number,
-    rate: PropTypes.number,
-    cleaningFee: PropTypes.number,
-    serviceFee: PropTypes.number,
-  }),
   left: PropTypes.bool,
   handleCheckInSelect: PropTypes.func,
   handleCheckOutSelect: PropTypes.func,
@@ -182,7 +170,6 @@ Month.propTypes = {
 
 Month.defaultProps = {
   monthArr: [],
-  listing: {},
   checkInClicked: false,
   checkInDate: {},
   checkOutClicked: false,

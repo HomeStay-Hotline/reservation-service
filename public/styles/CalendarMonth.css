@@ -2,15 +2,37 @@
 .monthHeaderRight {
     margin-bottom: 10px;
     font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+.monthHeaderRight {
+    padding-left: 25px;
 }
 
 .monthHeaderLeft button,
 .monthHeaderRight button {
-    background: none !important;
+    background: none;
     border: none;
     padding: 0 !important;
     cursor: pointer;
-    margin-left: 7px;
+    outline: none;
+    font-size: 16pt;
+}
+
+.monthHeaderLeft button {
+    margin-left: 22px;
+}
+
+.monthHeaderRight button {
+    padding-right: 50px;
+}
+
+.monthHeaderLeft button:hover,
+.monthHeaderRight button:hover {
+    background-color: #f7f7f7;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0px 10px #f7f7f7;
 }
 
 .monthHeaderLeft span {
@@ -18,21 +40,31 @@
 }
 
 .monthHeaderRight span {
-    margin-left: 105px;
+    margin-left: 100px;
 }
 
 .monthBody td {
-    padding-right: 22px;
-    padding-bottom: 1em;
+    margin: 10px;
+    padding: 10px;
     text-align: center;
 }
 
 .available,
 .notAvailable {
+    border: 1px solid transparent;
+}
+
+.available button,
+.notAvailable button {
     font-family: "Montserrat", sans-serif;
     background: none !important;
-    border: none;
+    border: none !important;
     font-size: 16px;
+}
+
+.available button,
+.available:hover {
+    cursor: pointer;
 }
 
 .available:hover {
@@ -40,16 +72,24 @@
     border-radius: 50%;
 }
 
-.notAvailable {
+.notAvailable button {
     text-decoration: line-through;
 }
 
 .checkIn,
-.checkOut {
+.checkOut,
+.checkIn button,
+.checkOut button {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     background-color: black;
     border: 1px solid black;
     border-radius: 50%;
+}
+
+.checkIn button,
+.checkOut button {
+    border: none !important;
+    outline: none !important;
     color: white;
 }
