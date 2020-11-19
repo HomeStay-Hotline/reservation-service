@@ -21,9 +21,8 @@ const Month = (props) => {
   const tdTemplate = (style, isDisabled, onClick, date) => {
     if (isDisabled) {
       return (
-        <td>
+        <td className={style}>
           <button
-            className={style}
             type="submit"
             disabled
           >
