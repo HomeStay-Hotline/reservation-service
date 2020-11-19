@@ -26,16 +26,12 @@ h3 {
     display: flex;
 }
 
-.reviews {
-    padding-right: 35px;
-}
-
-.reviews span {
-    margin: 5px;
-}
-
 .header {
     justify-content: space-between;
+}
+
+.ratePerNight {
+    padding-top: 10px;
 }
 
 .rate,
@@ -43,17 +39,40 @@ h3 {
     margin: 3px;
 }
 
-.rate {
-    padding-left: 35px;
+.rate h1 {
+    font-size: 18pt;
+    padding-left: 25px;
 }
 
 .night {
-    padding-top: 2px;
+    padding-top: 10px;
+}
+
+.reviews {
+    padding-right: 25px;
+    padding-top: 20px;
+}
+
+.reviews span {
+    margin: 3px;
+}
+
+.reviews h1 {
+    display: inline-block;
+    font-size: 11pt;
+    padding-top: 4px;
+}
+
+.reviews h3 {
+    display: inline-block;
+    font-size: 10pt;
+    font-weight: 100;
 }
 
 .icon {
+    display: inline-block;
     color: red;
-    padding-top: 17px;
+    padding-top: 16px;
 }
 
 .formWrapper {
@@ -79,9 +98,17 @@ input {
     outline: none;
     border: none;
     display: block;
-    line-height: 1.2em;
+    line-height: 2em;
     font-family: "Montserrat", sans-serif;
     font-size: 12pt;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 10px;
+    padding-left: 2px;
+    padding-top: 5px;
 }
 
 .checkInOut {
@@ -98,12 +125,6 @@ input {
     padding-right: 10px;
     padding-top: 5px;
     cursor: pointer;
-}
-
-label {
-    display: block;
-    font-weight: 600;
-    font-size: 10px;
 }
 
 .btn {

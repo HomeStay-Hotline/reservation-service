@@ -26,7 +26,7 @@ const ReservationHeader = (props) => {
       </div>
       <div className={styles.reviews}>
         <span>
-          <FontAwesomeIcon icon={faStar} className={styles.icon} />
+          <FontAwesomeIcon icon={faStar} size="xs" className={styles.icon} />
         </span>
         <span>
           <h1>4.0</h1>
