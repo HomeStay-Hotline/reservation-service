@@ -64,7 +64,6 @@ const Calendar = () => {
           dates={dates}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
-          listing={listing}
           handleCheckOutSelect={handleCheckOutSelect}
         />
         <div className={styles.footer}>
@@ -107,7 +106,6 @@ const Calendar = () => {
           checkInClicked={checkInClicked}
           checkOutDate={checkOutDate}
           checkOutClicked={checkOutClicked}
-          listing={listing}
         />
         <div className={styles.footer}>
           <button type="submit" onClick={clearDates}>Clear dates</button>
@@ -123,7 +121,6 @@ const Calendar = () => {
       </div>
       <CalendarBody
         dates={dates}
-        listing={listing}
         handleCheckInSelect={handleCheckInSelect}
       />
       <div className={styles.footer}>
