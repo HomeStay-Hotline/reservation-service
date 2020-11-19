@@ -133,7 +133,7 @@ const Month = (props) => {
       </div>
     );
   return (
-    <div className={styles.monthContainer}>
+    <div key={`${monthArr[0].month} ${monthArr[0].year}`} className={styles.monthContainer}>
       {monthHeader}
       <table>
         {makeDatesTable(monthArr)}

@@ -20,6 +20,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'no-console': 'off',
     'no-param-reassign': ['error', { props: false }],
+    'jsx-a11y/label-has-associated-control': 'off',
   },
   env: {
     browser: true,
