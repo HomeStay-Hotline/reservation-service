@@ -10,7 +10,7 @@ const App = () => (
       <Calendar />
     </div>
     <div className="reservation">
-      <Reservation />
+      <Reservation listingID={1} />
     </div>
   </div>
 );
