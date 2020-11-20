@@ -112,27 +112,14 @@ const Month = (props) => {
   if (monthArr.length === 0) {
     return <div>Loading...</div>;
   }
-  const monthHeader = left
-    ? (
-      <div className={styles.monthHeaderLeft}>
-        <span>
-          <button type="submit">&lt;</button>
-        </span>
-        <span>{`${monthArr[0].month} ${monthArr[0].year}`}</span>
-      </div>
-    )
-    : (
-      <div className={styles.monthHeaderRight}>
-        <span>{`${monthArr[0].month} ${monthArr[0].year}`}</span>
-        <span>
-          <button type="submit">&gt;</button>
-        </span>
-      </div>
-    );
   return (
     <div key={`${monthArr[0].month} ${monthArr[0].year}`} className={styles.monthContainer}>
-      {monthHeader}
       <table>
+        <thead className={styles.monthHeader}>
+          <tr>
+            <th colSpan="7">{`${monthArr[0].month} ${monthArr[0].year}`}</th>
+          </tr>
+        </thead>
         {makeDatesTable(monthArr)}
       </table>
     </div>
