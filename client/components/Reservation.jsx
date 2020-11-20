@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import ReservationHeader from './ReservationHeader';
 import ReservationForm from './ReservationForm';
 import styles from '../../public/styles/Reservation.css';
 
-const Reservation = () => {
-  const [listing, setListing] = useState({});
+const Reservation = (props) => {
+  const { listingID } = props;
+  const [listing, setListing] = useState(null);
 
   useEffect(() => {
-    axios.get('/api/homes/1/calendar')
+    axios.get(`/api/homes/${listingID}/calendar`)
       .then(({ data }) => {
         delete data[0].dates;
         setListing(data[0]);
@@ -22,7 +24,7 @@ const Reservation = () => {
     console.log('clicked!');
   };
 
-  if (Object.keys(listing).length === 0) {
+  if (!listing) {
     return (
       <div>Loading...</div>
     );
@@ -38,6 +40,10 @@ const Reservation = () => {
       </div>
     </div>
   );
+};
+
+Reservation.propTypes = {
+  listingID: PropTypes.number.isRequired,
 };
 
 export default Reservation;
