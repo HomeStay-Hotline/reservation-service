@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import CalendarBody from './CalendarBody';
 import styles from '../../public/styles/Calendar.css';
 
@@ -47,6 +49,19 @@ const Calendar = () => {
     setCheckOutClicked(true);
   };
 
+  const footer = (
+    <div className={styles.footer}>
+      <div>
+        <button type="submit" className={styles.keyboard}>
+          <FontAwesomeIcon icon={faKeyboard} size="2x" />
+        </button>
+      </div>
+      <div>
+        <button type="submit" className={styles.clear} onClick={clearDates}>Clear dates</button>
+      </div>
+    </div>
+  );
+
   if (checkInClicked) {
     return (
       <div className="container">
@@ -66,9 +81,7 @@ const Calendar = () => {
           checkInClicked={checkInClicked}
           handleCheckOutSelect={handleCheckOutSelect}
         />
-        <div className={styles.footer}>
-          <button type="submit" onClick={clearDates}>Clear dates</button>
-        </div>
+        {footer}
       </div>
     );
   }
@@ -107,9 +120,7 @@ const Calendar = () => {
           checkOutDate={checkOutDate}
           checkOutClicked={checkOutClicked}
         />
-        <div className={styles.footer}>
-          <button type="submit" onClick={clearDates}>Clear dates</button>
-        </div>
+        {footer}
       </div>
     );
   }
@@ -123,9 +134,7 @@ const Calendar = () => {
         dates={dates}
         handleCheckInSelect={handleCheckInSelect}
       />
-      <div className={styles.footer}>
-        <button type="submit" onClick={clearDates}>Clear dates</button>
-      </div>
+      {footer}
     </div>
   );
 };

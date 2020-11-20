@@ -1,12 +1,81 @@
 .body {
     display: flex;
+    width: 796px;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
-.bodyRight {
-    float: left;
+.body div {
+    margin-right: 10px;
 }
 
-.bodyLeft {
-    float: left;
-    margin-right: 40px;
+.scrollLeft, 
+.scrollRight {
+    outline: none;
+    border: none;
+    background: none;
+    height: 10px;
+    position: absolute;
+    font-size: 16pt;
+    height: 25px;
 }
+
+.scrollLeft:hover:enabled, 
+.scrollRight:hover:enabled {
+    background-color: #f7f7f7;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0px 10px #f7f7f7;
+    cursor: pointer;
+}
+
+.body .scrollLeft {
+    top: 10px;
+    left: 13px;
+}
+
+.body .scrollRight {  
+    top: 6px;
+    right: 20px;
+}
+
+.monthHeaderLeft button,
+.monthHeaderRight button {
+    background: none;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    outline: none;
+    font-size: 16pt;
+}
+
+.monthHeaderLeft button {
+    margin-left: 22px;
+}
+
+.monthHeaderRight button {
+    padding-right: 30px;
+}
+
+.monthHeaderLeft button:hover,
+.monthHeaderRight button:hover {
+    background-color: #f7f7f7;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 0px 10px #f7f7f7;
+}
+
+@keyframes animateSlideOut {
+    0%   {
+      margin-left: 0px;
+    }
+    100% {
+      margin-left: -325px;
+    }
+}
+
+.slideOut {
+    animation: animateSlideOut 0.8s;
+}
+

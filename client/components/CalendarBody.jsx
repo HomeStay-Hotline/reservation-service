@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Month from './Month';
 import styles from '../../public/styles/CalendarBody.css';
@@ -13,25 +13,54 @@ const CalendarBody = (props) => {
     handleCheckInSelect,
     handleCheckOutSelect,
   } = props;
-  // const handleLeftRightToggle = () => null;
-  useEffect(() => {}, [checkInDate]);
+  const [monthsToRender, setMonthsToRender] = useState([]);
+  const [leftMonthIndex, setLeftMonthIndex] = useState(0);
+  const [rightMonthIndex, setRightMonthIndex] = useState(1);
+
+  useEffect(() => {
+    setMonthsToRender([dates[leftMonthIndex], dates[rightMonthIndex]]);
+  }, [dates, leftMonthIndex, rightMonthIndex, checkInDate]);
+
+  const handleScrollRightClick = () => {
+    setLeftMonthIndex(leftMonthIndex + 1);
+    setRightMonthIndex(rightMonthIndex + 1);
+  };
+
+  const handleScrollLeftClick = () => {
+    setLeftMonthIndex(leftMonthIndex - 1);
+    setRightMonthIndex(rightMonthIndex - 1);
+  };
+
+  if (!dates) {
+    return <div>Loading...</div>;
+  }
+  const scrollRight = rightMonthIndex !== dates.length - 1
+    ? <button className={styles.scrollRight} type="submit" onClick={handleScrollRightClick}>&gt;</button>
+    : <button className={styles.scrollRight} type="submit" disabled>&gt;</button>;
+
+  const scrollLeft = leftMonthIndex === 0
+    ? <button className={styles.scrollLeft} type="submit" disabled>&lt;</button>
+    : <button className={styles.scrollLeft} type="submit" onClick={handleScrollLeftClick}>&lt;</button>;
+
   return (
     <div className={styles.body}>
-      <div className={styles.bodyLeft}>
+      {scrollRight}
+      {scrollLeft}
+      <div>
         <Month
-          monthArr={dates[0]}
+          monthArr={monthsToRender[0]}
+          left
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
           checkOutDate={checkOutDate}
           checkOutClicked={checkOutClicked}
-          left
           handleCheckInSelect={handleCheckInSelect}
           handleCheckOutSelect={handleCheckOutSelect}
         />
       </div>
-      <div className={styles.bodyRight}>
+      <div>
         <Month
-          monthArr={dates[1]}
+          monthArr={monthsToRender[1]}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
           checkOutDate={checkOutDate}
