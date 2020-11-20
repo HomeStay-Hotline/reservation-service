@@ -24,5 +24,18 @@ describe('<ReservationHeader />', () => {
     test('it should render a header for the Reservation module', () => {
       expect(wrapper.is('.header')).toBe(true);
     });
+
+    test('it should render a rate per night section', () => {
+      const ratePerNight = wrapper.find('.ratePerNight');
+      expect(ratePerNight).toHaveLength(1);
+      expect(ratePerNight.childAt(0).is('.rate')).toBe(true);
+      expect(ratePerNight.childAt(1).is('.night')).toBe(true);
+    });
+
+    test('it should render a reviews section', () => {
+      const reviews = wrapper.find('.reviews');
+      expect(reviews).toHaveLength(1);
+      expect(reviews.find('span')).toHaveLength(3);
+    });
   });
 });
