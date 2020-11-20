@@ -1,52 +1,16 @@
-.monthHeaderLeft,
-.monthHeaderRight {
-    margin-bottom: 10px;
+.monthHeader th {
+    margin: 10px;
+    padding: 10px;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
-}
-
-.monthHeaderRight {
-    padding-left: 25px;
-}
-
-.monthHeaderLeft button,
-.monthHeaderRight button {
-    background: none;
-    border: none;
-    padding: 0 !important;
-    cursor: pointer;
-    outline: none;
-    font-size: 16pt;
-}
-
-.monthHeaderLeft button {
-    margin-left: 22px;
-}
-
-.monthHeaderRight button {
-    padding-right: 50px;
-}
-
-.monthHeaderLeft button:hover,
-.monthHeaderRight button:hover {
-    background-color: #f7f7f7;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 0 0px 10px #f7f7f7;
-}
-
-.monthHeaderLeft span {
-    margin-right: 100px;
-}
-
-.monthHeaderRight span {
-    margin-left: 100px;
+    text-align: center;
 }
 
 .monthBody td {
     margin: 10px;
     padding: 10px;
     text-align: center;
+    height: 32px;
 }
 
 .available,
@@ -59,6 +23,7 @@
     font-family: "Montserrat", sans-serif;
     background: none !important;
     border: none !important;
+    outline: none;
     font-size: 16px;
 }
 
