@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import CalendarBody from './CalendarBody';
-import styles from '../../public/styles/Calendar.css';
+import styles from '../../public/styles/calendar.css';
 
 const Calendar = () => {
   const [listing, setListing] = useState({});
