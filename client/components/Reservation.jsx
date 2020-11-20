@@ -7,7 +7,7 @@ import styles from '../../public/styles/Reservation.css';
 
 const Reservation = (props) => {
   const { listingID } = props;
-  const [listing, setListing] = useState({});
+  const [listing, setListing] = useState(null);
 
   useEffect(() => {
     axios.get(`/api/homes/${listingID}/calendar`)
@@ -24,7 +24,7 @@ const Reservation = (props) => {
     console.log('clicked!');
   };
 
-  if (Object.keys(listing).length === 0) {
+  if (!listing) {
     return (
       <div>Loading...</div>
     );
