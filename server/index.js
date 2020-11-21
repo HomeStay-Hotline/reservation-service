@@ -26,5 +26,5 @@ app.get('/api/homes/:id/calendar', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on http:localhost:${port}`);
+  console.log(`Server running on EC2 instance on port ${port}`);
 });
