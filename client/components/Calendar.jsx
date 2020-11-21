@@ -17,19 +17,19 @@ const Calendar = () => {
   // fetch dates data from the server
   // empty array as 2nd arg stops fetch from infinite loop
   useEffect(() => {
-    axios.get('/api/homes/1/calendar')
+    axios.get(`/api/homes${window.location.pathname}calendar`)
       .then(({ data }) => {
         const months = ['November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'];
         const monthsWithDates = [];
         for (let i = 0; i < months.length; i += 1) {
-          monthsWithDates.push(data[0].dates.filter((date) => date.month === months[i]));
+          monthsWithDates.push(data[0].dates.filter((dt) => dt.month === months[i]));
         }
         setDates(monthsWithDates);
         delete data[0].dates;
         setListing(data[0]);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((serverErr) => {
+        console.log(serverErr);
       });
   }, []);
 
