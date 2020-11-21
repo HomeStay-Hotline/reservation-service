@@ -6,11 +6,12 @@ const db = require('../db/index');
 
 const app = express();
 const port = 3000;
+const PUB_DIR = path.resolve(__dirname, '..', 'public');
 
 app.use(morgan('dev'));
 app.use(parser.json());
 
-app.use(express.static(path.resolve(__dirname, '..', 'public')));
+app.use('/:id', express.static(PUB_DIR));
 
 app.get('/api/homes/:id/calendar', (req, res) => {
   const { id } = req.params;
