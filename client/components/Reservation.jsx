@@ -10,7 +10,7 @@ const Reservation = (props) => {
   const [listing, setListing] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/homes/${listingID}/calendar`)
+    axios.get(`/api/homes${window.location.pathname}calendar`)
       .then(({ data }) => {
         delete data[0].dates;
         setListing(data[0]);
