@@ -77,6 +77,7 @@ const Calendar = () => {
         </div>
         <CalendarBody
           dates={dates}
+          minDays={listing.minDays}
           checkInDate={checkInDate}
           checkInClicked={checkInClicked}
           handleCheckOutSelect={handleCheckOutSelect}
