@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
 
-.monthHeader table {
-    border-collapse: collapse;
-}
-
 .monthHeader th {
     margin: 10px;
     padding: 10px;
