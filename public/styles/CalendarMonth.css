@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
 
+.monthHeader table {
+    border-collapse: collapse;
+}
+
 .monthHeader th {
     margin: 10px;
     padding: 10px;
@@ -16,12 +20,20 @@
 }
 
 .available,
-.notAvailable {
+.notAvailable,
+.minDays {
     border: 1px solid transparent;
 }
 
+.daysBetween {
+    background-color: lightgrey;
+    border-radius: 50%;
+}
+
 .available button,
-.notAvailable button {
+.notAvailable button,
+.minDays button,
+.daysBetween button {
     font-family: "Montserrat", sans-serif;
     background: none !important;
     border: none !important;
