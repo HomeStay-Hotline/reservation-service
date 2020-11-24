@@ -13,7 +13,6 @@ const Month = (props) => {
     checkInClicked,
     checkOutDate,
     checkOutClicked,
-    left,
     handleCheckInSelect,
     handleCheckOutSelect,
   } = props;
@@ -73,9 +72,7 @@ const Month = (props) => {
               if (!dates[currDate].available) {
                 return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
               }
-              const dateNumber = parseInt(date.date, 10);
               // const minStayDate = parseInt(date.date, 10) + listing.minDays;
-              const checkInDateNum = parseInt(checkInDate.date, 10);
               if (checkInClicked) {
                 // if the current date is behind the checkInDate, disable the button
                 // (can't select a checkout date that's in the past)
@@ -164,7 +161,6 @@ Month.propTypes = {
     year: PropTypes.string,
     available: PropTypes.bool,
   }),
-  left: PropTypes.bool,
   handleCheckInSelect: PropTypes.func,
   handleCheckOutSelect: PropTypes.func,
 };
@@ -176,7 +172,6 @@ Month.defaultProps = {
   checkInDate: {},
   checkOutClicked: false,
   checkOutDate: {},
-  left: false,
   handleCheckInSelect: null,
   handleCheckOutSelect: null,
 };

@@ -47,31 +47,20 @@ const CalendarBody = (props) => {
     <div className={styles.body}>
       {scrollRight}
       {scrollLeft}
-      <div>
-        <Month
-          monthArr={monthsToRender[0]}
-          minDays={minDays}
-          left
-          checkInDate={checkInDate}
-          checkInClicked={checkInClicked}
-          checkOutDate={checkOutDate}
-          checkOutClicked={checkOutClicked}
-          handleCheckInSelect={handleCheckInSelect}
-          handleCheckOutSelect={handleCheckOutSelect}
-        />
-      </div>
-      <div>
-        <Month
-          monthArr={monthsToRender[1]}
-          minDays={minDays}
-          checkInDate={checkInDate}
-          checkInClicked={checkInClicked}
-          checkOutDate={checkOutDate}
-          checkOutClicked={checkOutClicked}
-          handleCheckInSelect={handleCheckInSelect}
-          handleCheckOutSelect={handleCheckOutSelect}
-        />
-      </div>
+      {monthsToRender.map((month) => (
+        <div>
+          <Month
+            monthArr={month}
+            minDays={minDays}
+            checkInDate={checkInDate}
+            checkInClicked={checkInClicked}
+            checkOutDate={checkOutDate}
+            checkOutClicked={checkOutClicked}
+            handleCheckInSelect={handleCheckInSelect}
+            handleCheckOutSelect={handleCheckOutSelect}
+          />
+        </div>
+      ))}
     </div>
   );
 };
