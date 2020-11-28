@@ -20,10 +20,6 @@ const Reservation = (props) => {
       });
   }, []);
 
-  const handleGuestSelectClick = () => {
-    console.log('clicked!');
-  };
-
   if (!listing) {
     return (
       <div>Loading...</div>
@@ -32,7 +28,7 @@ const Reservation = (props) => {
   return (
     <div className={styles.container}>
       <ReservationHeader rate={listing.rate} />
-      <ReservationForm handleGuestSelectClick={handleGuestSelectClick} />
+      <ReservationForm />
       <div className={styles.btn}>
         <button type="submit" className={styles.reserve}>
           Check availability
