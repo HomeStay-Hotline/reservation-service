@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -7,11 +8,11 @@ import styles from '../../public/styles/CalendarMonth.css';
 const Month = (props) => {
   const {
     monthArr,
+    minDays,
     checkInDate,
     checkInClicked,
     checkOutDate,
     checkOutClicked,
-    left,
     handleCheckInSelect,
     handleCheckOutSelect,
   } = props;
@@ -71,16 +72,18 @@ const Month = (props) => {
               if (!dates[currDate].available) {
                 return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
               }
-              const dateNumber = parseInt(date.date, 10);
               // const minStayDate = parseInt(date.date, 10) + listing.minDays;
-              const checkInDateNum = parseInt(checkInDate.date, 10);
               if (checkInClicked) {
                 // if the current date is behind the checkInDate, disable the button
                 // (can't select a checkout date that's in the past)
-                if ((date.month === checkInDate.month
-                    && dateNumber < checkInDateNum)
-                    || (date.month !== checkInDate.month && left)) {
+                const currentDate = new Date(`${date.month} ${date.date} ${date.year}`);
+                const checkInToDate = new Date(`${checkInDate.month} ${checkInDate.date} ${checkInDate.year}`);
+                const daysDiff = Math.floor(((Date.parse(currentDate) - Date.parse(checkInToDate)) / 86400000));
+                if (currentDate < checkInToDate) {
                   return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                }
+                if (currentDate > checkInToDate && daysDiff < minDays) {
+                  return tdTemplate(styles.minDays, true, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkInDate)) {
                   return tdTemplate(styles.checkIn, false, null, dates[currDate++]);
@@ -88,16 +91,23 @@ const Month = (props) => {
                 return tdTemplate(styles.available, false, handleCheckOutSelect, dates[currDate++]);
               }
               if (checkOutClicked) {
-                if ((date.month === checkInDate.month
-                  && dateNumber < checkInDateNum)
-                  || (date.month !== checkInDate.month && left)) {
+                const currentDate = new Date(`${date.month} ${date.date} ${date.year}`);
+                const checkInToDate = new Date(`${checkInDate.month} ${checkInDate.date} ${checkInDate.year}`);
+                const checkOutToDate = new Date(`${checkOutDate.month} ${checkOutDate.date} ${checkOutDate.year}`);
+                if (currentDate < checkInToDate) {
                   return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                }
+                if (currentDate > checkInToDate && currentDate < checkOutToDate) {
+                  return tdTemplate(styles.daysBetween, true, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkInDate)) {
                   return tdTemplate(styles.checkIn, false, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkOutDate)) {
                   return tdTemplate(styles.checkOut, false, null, dates[currDate++]);
+                }
+                if (currentDate > checkOutToDate) {
+                  return tdTemplate(styles.available, false, handleCheckInSelect, dates[currDate++]);
                 }
                 return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
               }
@@ -134,6 +144,7 @@ Month.propTypes = {
     year: PropTypes.string.isRequired,
     available: PropTypes.bool.isRequired,
   })),
+  minDays: PropTypes.number,
   checkInClicked: PropTypes.bool,
   checkInDate: PropTypes.shape({
     dayOfWeek: PropTypes.string,
@@ -150,18 +161,17 @@ Month.propTypes = {
     year: PropTypes.string,
     available: PropTypes.bool,
   }),
-  left: PropTypes.bool,
   handleCheckInSelect: PropTypes.func,
   handleCheckOutSelect: PropTypes.func,
 };
 
 Month.defaultProps = {
   monthArr: [],
+  minDays: 0,
   checkInClicked: false,
   checkInDate: {},
   checkOutClicked: false,
   checkOutDate: {},
-  left: false,
   handleCheckInSelect: null,
   handleCheckOutSelect: null,
 };

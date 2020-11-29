@@ -6,6 +6,7 @@ import styles from '../../public/styles/CalendarBody.css';
 const CalendarBody = (props) => {
   const {
     dates,
+    minDays,
     checkInDate,
     checkInClicked,
     checkOutDate,
@@ -46,29 +47,20 @@ const CalendarBody = (props) => {
     <div className={styles.body}>
       {scrollRight}
       {scrollLeft}
-      <div>
-        <Month
-          monthArr={monthsToRender[0]}
-          left
-          checkInDate={checkInDate}
-          checkInClicked={checkInClicked}
-          checkOutDate={checkOutDate}
-          checkOutClicked={checkOutClicked}
-          handleCheckInSelect={handleCheckInSelect}
-          handleCheckOutSelect={handleCheckOutSelect}
-        />
-      </div>
-      <div>
-        <Month
-          monthArr={monthsToRender[1]}
-          checkInDate={checkInDate}
-          checkInClicked={checkInClicked}
-          checkOutDate={checkOutDate}
-          checkOutClicked={checkOutClicked}
-          handleCheckInSelect={handleCheckInSelect}
-          handleCheckOutSelect={handleCheckOutSelect}
-        />
-      </div>
+      {monthsToRender.map((month) => (
+        <div>
+          <Month
+            monthArr={month}
+            minDays={minDays}
+            checkInDate={checkInDate}
+            checkInClicked={checkInClicked}
+            checkOutDate={checkOutDate}
+            checkOutClicked={checkOutClicked}
+            handleCheckInSelect={handleCheckInSelect}
+            handleCheckOutSelect={handleCheckOutSelect}
+          />
+        </div>
+      ))}
     </div>
   );
 };
@@ -81,6 +73,7 @@ CalendarBody.propTypes = {
     year: PropTypes.string.isRequired,
     available: PropTypes.bool.isRequired,
   }))).isRequired,
+  minDays: PropTypes.number,
   checkInClicked: PropTypes.bool,
   checkInDate: PropTypes.shape({
     dayOfWeek: PropTypes.string,
@@ -102,6 +95,7 @@ CalendarBody.propTypes = {
 };
 
 CalendarBody.defaultProps = {
+  minDays: 0,
   checkInClicked: false,
   checkInDate: {},
   checkOutClicked: false,

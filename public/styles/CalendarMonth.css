@@ -16,12 +16,20 @@
 }
 
 .available,
-.notAvailable {
+.notAvailable,
+.minDays {
     border: 1px solid transparent;
 }
 
+.daysBetween {
+    background-color: #f7f7f7;
+    border-radius: 50%;
+}
+
 .available button,
-.notAvailable button {
+.notAvailable button,
+.minDays button,
+.daysBetween button {
     font-family: "Montserrat", sans-serif;
     background: none !important;
     border: none !important;
