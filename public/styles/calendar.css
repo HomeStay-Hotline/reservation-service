@@ -1,35 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
 
-.header,
-.body, 
-.footer,
-td {  
+.calendarHeader,
+.calendarBody, 
+.calendarFooter,
+.calendarContainer td {  
     font-family: "Montserrat", sans-serif;
 }
 
-h1 {
+.calendarContainer h1 {
     font-weight: 600;
     font-size: 25px;
 }
 
-h3 {
+.calendarContainer h3 {
     font-weight: 100;
     font-size: 15px;
 }
 
-.footer {
+.calendarFooter {
     width: 785px;
 }
 
-.keyboard,
-.clear {
+.calendarKeyboard,
+.calendarClear {
     background: none;
     border: none;
     cursor: pointer;
     outline: none;
 }
 
-.keyboard {
+.calendarKeyboard {
     background: none;
     border: none;
     text-decoration: underline;
@@ -40,7 +40,7 @@ h3 {
     height: 44px;
 }
 
-.clear {
+.calendarClear {
     background: none;
     border: none;
     text-decoration: underline;
@@ -50,17 +50,17 @@ h3 {
     font-size: 12pt;
 }
 
-.keyboard:hover,
-.clear:hover {
+.calendarKeyboard:hover,
+.calendarClear:hover {
     background-color: #f7f7f7;
     border: none;
     box-shadow: 0 0 0px 10px #f7f7f7;
 }
 
-.clear:hover {
+.calendarClear:hover {
     border-radius: 2px;
 }
 
-.keyboard:hover {
+.calendarKeyboard:hover {
     border-radius: 50%;
 }

@@ -50,22 +50,22 @@ const Calendar = () => {
   };
 
   const footer = (
-    <div className={styles.footer}>
+    <div className={styles.calendarFooter}>
       <div>
-        <button type="submit" className={styles.keyboard}>
+        <button type="submit" className={styles.calendarKeyboard}>
           <FontAwesomeIcon icon={faKeyboard} size="2x" />
         </button>
       </div>
       <div>
-        <button type="submit" className={styles.clear} onClick={clearDates}>Clear dates</button>
+        <button type="submit" className={styles.calendarClear} onClick={clearDates}>Clear dates</button>
       </div>
     </div>
   );
 
   if (checkInClicked) {
     return (
-      <div className="container">
-        <div className={styles.header}>
+      <div className={styles.calendarContainer}>
+        <div className={styles.calendarHeader}>
           <h1>Select check-out date</h1>
           <h3>
             Minimum stay:
@@ -91,8 +91,8 @@ const Calendar = () => {
     const checkOutStr = `${checkOutDate.month} ${checkOutDate.date} ${checkOutDate.year}`;
     const dayDiff = Math.floor((Date.parse(checkOutStr) - Date.parse(checkInStr)) / 86400000);
     return (
-      <div className="container">
-        <div className={styles.header}>
+      <div className={styles.calendarContainer}>
+        <div className={styles.calendarHeader}>
           <h1>
             {dayDiff}
             {' '}
@@ -126,8 +126,8 @@ const Calendar = () => {
     );
   }
   return (
-    <div className="container">
-      <div className={styles.header}>
+    <div className={styles.calendarContainer}>
+      <div className={styles.calendarHeader}>
         <h1>Select check-in date</h1>
         <h3>Add your travel dates for exact pricing</h3>
       </div>
