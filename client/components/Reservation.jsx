@@ -26,11 +26,11 @@ const Reservation = (props) => {
     );
   }
   return (
-    <div className={styles.container}>
+    <div className={styles.reservationContainer}>
       <ReservationHeader rate={listing.rate} />
       <ReservationForm />
-      <div className={styles.btn}>
-        <button type="submit" className={styles.reserve}>
+      <div className={styles.reservationBtn}>
+        <button type="submit" className={styles.reservationReserve}>
           Check availability
         </button>
       </div>

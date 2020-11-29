@@ -7,9 +7,9 @@ import styles from '../../public/styles/Reservation.css';
 const ReservationHeader = (props) => {
   const { rate } = props;
   return (
-    <div className={styles.header}>
-      <div className={styles.ratePerNight}>
-        <div className={styles.rate}>
+    <div className={styles.reservationHeader}>
+      <div className={styles.reservationRatePerNight}>
+        <div className={styles.reservationRate}>
           <span>
             <h1>
               {'$'}
@@ -18,15 +18,15 @@ const ReservationHeader = (props) => {
             </h1>
           </span>
         </div>
-        <div className={styles.night}>
+        <div className={styles.reservationNight}>
           <span>
             <h3>/ night</h3>
           </span>
         </div>
       </div>
-      <div className={styles.reviews}>
+      <div className={styles.reservationReviews}>
         <span>
-          <FontAwesomeIcon icon={faStar} size="xs" className={styles.icon} />
+          <FontAwesomeIcon icon={faStar} size="xs" className={styles.reservationIcon} />
         </span>
         <span>
           <h1>4.0</h1>
