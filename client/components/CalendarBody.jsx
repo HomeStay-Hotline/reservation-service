@@ -36,15 +36,15 @@ const CalendarBody = (props) => {
     return <div>Loading...</div>;
   }
   const scrollRight = rightMonthIndex !== dates.length - 1
-    ? <button className={styles.scrollRight} type="submit" onClick={handleScrollRightClick}>&gt;</button>
-    : <button className={styles.scrollRight} type="submit" disabled>&gt;</button>;
+    ? <button className={styles.calendarBodyScrollRight} type="submit" onClick={handleScrollRightClick}>&gt;</button>
+    : <button className={styles.calendarBodyScrollRight} type="submit" disabled>&gt;</button>;
 
   const scrollLeft = leftMonthIndex === 0
-    ? <button className={styles.scrollLeft} type="submit" disabled>&lt;</button>
-    : <button className={styles.scrollLeft} type="submit" onClick={handleScrollLeftClick}>&lt;</button>;
+    ? <button className={styles.calendarBodyScrollLeft} type="submit" disabled>&lt;</button>
+    : <button className={styles.calendarBodyScrollLeft} type="submit" onClick={handleScrollLeftClick}>&lt;</button>;
 
   return (
-    <div className={styles.body}>
+    <div className={styles.calendarBody}>
       {scrollRight}
       {scrollLeft}
       {monthsToRender.map((month) => (

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap');
 
-.monthHeader th {
+.calendarMonthHeader th {
     margin: 10px;
     padding: 10px;
     font-family: "Montserrat", sans-serif;
@@ -8,16 +8,16 @@
     text-align: center;
 }
 
-.monthBody td {
+.calendarMonthBody td {
     margin: 10px;
     padding: 10px;
     text-align: center;
     height: 32px;
 }
 
-.available,
-.notAvailable,
-.minDays {
+.calendarMonthAvailable,
+.calendarMonthUnavailable,
+.calendarMonthMinDays {
     border: 1px solid transparent;
 }
 
@@ -26,9 +26,9 @@
     border-radius: 50%;
 }
 
-.available button,
-.notAvailable button,
-.minDays button,
+.calendarMonthAvailable button,
+.calendarMonthUnavailable button,
+.calendarMonthMinDays button,
 .daysBetween button {
     font-family: "Montserrat", sans-serif;
     background: none !important;
@@ -37,24 +37,24 @@
     font-size: 16px;
 }
 
-.available button,
-.available:hover {
+.calendarMonthAvailable button,
+.calendarMonthAvailable:hover {
     cursor: pointer;
 }
 
-.available:hover {
+.calendarMonthAvailable:hover {
     border: 1px solid black;
     border-radius: 50%;
 }
 
-.notAvailable button {
+.calendarMonthUnavailable button {
     text-decoration: line-through;
 }
 
-.checkIn,
-.checkOut,
-.checkIn button,
-.checkOut button {
+.calendarMonthCheckIn,
+.calendarMonthCheckOut,
+.calendarMonthCheckIn button,
+.calendarMonthCheckOut button {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     background-color: black;
@@ -62,8 +62,8 @@
     border-radius: 50%;
 }
 
-.checkIn button,
-.checkOut button {
+.calendarMonthCheckIn button,
+.calendarMonthCheckOut button {
     border: none !important;
     outline: none !important;
     color: white;

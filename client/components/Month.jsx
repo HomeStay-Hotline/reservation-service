@@ -53,7 +53,7 @@ const Month = (props) => {
     let currDate = 0;
     const startIndex = days.indexOf(dates[0].dayOfWeek);
     return (
-      <tbody className={styles.monthBody}>
+      <tbody className={styles.calendarMonthBody}>
         <tr>
           {days.map((day) => <td>{day.slice(0, 2)}</td>)}
         </tr>
@@ -70,9 +70,8 @@ const Month = (props) => {
               }
               // if dates at the currDate is unavailable
               if (!dates[currDate].available) {
-                return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                return tdTemplate(styles.calendarMonthUnavailable, true, null, dates[currDate++]);
               }
-              // const minStayDate = parseInt(date.date, 10) + listing.minDays;
               if (checkInClicked) {
                 // if the current date is behind the checkInDate, disable the button
                 // (can't select a checkout date that's in the past)
@@ -80,38 +79,38 @@ const Month = (props) => {
                 const checkInToDate = new Date(`${checkInDate.month} ${checkInDate.date} ${checkInDate.year}`);
                 const daysDiff = Math.floor(((Date.parse(currentDate) - Date.parse(checkInToDate)) / 86400000));
                 if (currentDate < checkInToDate) {
-                  return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthUnavailable, true, null, dates[currDate++]);
                 }
                 if (currentDate > checkInToDate && daysDiff < minDays) {
-                  return tdTemplate(styles.minDays, true, null, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthMinDays, true, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkInDate)) {
-                  return tdTemplate(styles.checkIn, false, null, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthCheckIn, false, null, dates[currDate++]);
                 }
-                return tdTemplate(styles.available, false, handleCheckOutSelect, dates[currDate++]);
+                return tdTemplate(styles.calendarMonthAvailable, false, handleCheckOutSelect, dates[currDate++]);
               }
               if (checkOutClicked) {
                 const currentDate = new Date(`${date.month} ${date.date} ${date.year}`);
                 const checkInToDate = new Date(`${checkInDate.month} ${checkInDate.date} ${checkInDate.year}`);
                 const checkOutToDate = new Date(`${checkOutDate.month} ${checkOutDate.date} ${checkOutDate.year}`);
                 if (currentDate < checkInToDate) {
-                  return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthUnavailable, true, null, dates[currDate++]);
                 }
                 if (currentDate > checkInToDate && currentDate < checkOutToDate) {
                   return tdTemplate(styles.daysBetween, true, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkInDate)) {
-                  return tdTemplate(styles.checkIn, false, null, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthCheckIn, false, null, dates[currDate++]);
                 }
                 if (_.isEqual(dates[currDate], checkOutDate)) {
-                  return tdTemplate(styles.checkOut, false, null, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthCheckOut, false, null, dates[currDate++]);
                 }
                 if (currentDate > checkOutToDate) {
-                  return tdTemplate(styles.available, false, handleCheckInSelect, dates[currDate++]);
+                  return tdTemplate(styles.calendarMonthAvailable, false, handleCheckInSelect, dates[currDate++]);
                 }
-                return tdTemplate(styles.notAvailable, true, null, dates[currDate++]);
+                return tdTemplate(styles.calendarMonthUnavailable, true, null, dates[currDate++]);
               }
-              return tdTemplate(styles.available, false, handleCheckInSelect, dates[currDate++]);
+              return tdTemplate(styles.calendarMonthAvailable, false, handleCheckInSelect, dates[currDate++]);
             })}
           </tr>
         ))}
@@ -123,9 +122,9 @@ const Month = (props) => {
     return <div>Loading...</div>;
   }
   return (
-    <div key={`${monthArr[0].month} ${monthArr[0].year}`} className={styles.monthContainer}>
+    <div key={`${monthArr[0].month} ${monthArr[0].year}`} className={styles.calendarMonthContainer}>
       <table>
-        <thead className={styles.monthHeader}>
+        <thead className={styles.calendarMonthHeader}>
           <tr>
             <th colSpan="7">{`${monthArr[0].month} ${monthArr[0].year}`}</th>
           </tr>
