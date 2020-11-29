@@ -8,14 +8,6 @@ const ReservationForm = (props) => {
     setGuestClicked(true);
   };
 
-  let guestSelect;
-  if (guestClicked) {
-    guestSelect = (
-      <div className={styles.reservationGuestSelect}>
-        hey lol
-      </div>
-    );
-  }
   return (
     <div>
 
@@ -56,7 +48,6 @@ const ReservationForm = (props) => {
           </tr>
         </tbody>
       </table>
-      {guestSelect}
     </div>
   );
 };
