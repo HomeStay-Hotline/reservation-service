@@ -19,7 +19,7 @@ const Calendar = () => {
   useEffect(() => {
     axios.get(`/api/homes${window.location.pathname}calendar`)
       .then(({ data }) => {
-        const months = ['November', 'December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October'];
+        const months = ['December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
         const monthsWithDates = [];
         for (let i = 0; i < months.length; i += 1) {
           monthsWithDates.push(data[0].dates.filter((dt) => dt.month === months[i]));
