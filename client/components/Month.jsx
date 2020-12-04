@@ -17,6 +17,7 @@ const Month = (props) => {
     handleCheckOutSelect,
   } = props;
 
+ 
   useEffect(() => {}, [monthArr, checkInClicked]);
 
   const tdTemplate = (style, isDisabled, onClick, date) => {

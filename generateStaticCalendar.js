@@ -1,6 +1,3 @@
-const faker = require('faker');
-const db = require('./index.js');
-
 // Adds a given number of days to a given date and returns a new Date with those days added
 const addDays = (date, days) => {
   const result = new Date(date);
@@ -76,66 +73,4 @@ for (let i = 0; i < months.length; i += 1) {
   monthsWithDates.push(staticCalendar.filter((dt) => dt.month === months[i]));
 }
 
-const createRandomReservations = (minimum) => {
-  const months2 = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const index = Math.floor(Math.random() * 12);
-  const index2 = Math.floor(Math.random() * monthsWithDates[index].length);
-  const newFirst = (monthsWithDates[index][index2]);
-  const randomReserve = {};
-  randomReserve.firstDate = new Date(newFirst.year, months2.indexOf(newFirst.month), newFirst.date);
-  const index3 = Math.floor(Math.random() * 5) + minimum;
-  // this needs to be changed, 4 needs to be replaced with minimum nights of stay
-  randomReserve.lastDate = new Date();
-  randomReserve.lastDate.setYear(randomReserve.firstDate.getFullYear());
-  randomReserve.lastDate.setMonth(randomReserve.firstDate.getMonth());
-  randomReserve.lastDate.setDate(randomReserve.firstDate.getDate() + index3);
-  return randomReserve;
-};
-
-
-// Creates all listings to enter into the database
-const createListings = () => {
-  const listings = [];
-  for (let i = 0; i < 100; i += 1) {
-    const rate = faker.random.number({ min: 30, max: 300 });
-    const serviceFee = Math.floor(rate * 0.142);
-    const minStay = faker.random.number({ min: 1, max: 14 });
-    const reservations = [];
-    for (let j = 0; j < (faker.random.number({min: 1, max: 5})); j++) {
-      reservations.push(createRandomReservations(minStay));
-    }
-    console.log(reservations);
-    listings.push({
-      listing_ID: i + 1,
-      name: faker.address.city(),
-      maxGuests: faker.random.number({ min: 1, max: 16 }),
-      minDays: minStay,
-      rate,
-      cleaningFee: faker.random.number({ min: 50, max: 60 }),
-      serviceFee,
-      dates: reservations,
-    });
-  }
-  return listings;
-};
-
-const allListings = createListings();
-
-// Depopulates any data currently in the Listings table and then
-// populates the Listing table with 100 entries.
-const populate = () => {
-  db.Listing.deleteMany({}, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      db.Listing.insertMany(allListings, (secondErr) => {
-        if (err) {
-          console.log('Failed to create new record to the database', secondErr);
-        }
-        db.mongoose.connection.close();
-      });
-    }
-  });
-};
-
-populate();
+export default monthsWithDates;

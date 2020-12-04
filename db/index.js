@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/reservations', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const datesSchema = mongoose.Schema({
-  dayOfWeek: String,
-  month: String,
-  date: String,
-  year: String,
-  available: Boolean,
-}, { _id: false });
+// const datesSchema = mongoose.Schema({
+//   dayOfWeek: String,
+//   month: String,
+//   date: String,
+//   year: String,
+//   available: Boolean,
+// }, { _id: false });
 
 const listingSchema = mongoose.Schema({
   listing_ID: { type: Number, unique: true },
@@ -18,7 +18,7 @@ const listingSchema = mongoose.Schema({
   rate: Number,
   cleaningFee: Number,
   serviceFee: Number,
-  dates: [datesSchema],
+  dates: [{ firstDate: Date, lastDate: Date }],
 });
 
 const reservationsSchema = mongoose.Schema({

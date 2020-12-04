@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
 import CalendarBody from './CalendarBody';
 import styles from '../../public/styles/calendar.css';
+import staticCalendar from '../../generateStaticCalendar.js';
 
 const Calendar = () => {
   const [listing, setListing] = useState({});
@@ -13,20 +14,47 @@ const Calendar = () => {
   const [checkInClicked, setCheckInClicked] = useState(false);
   const [checkOutDate, setCheckOutDate] = useState({});
   const [checkOutClicked, setCheckOutClicked] = useState(false);
+  const [reservations, setReservations] = useState([]);
 
   // fetch dates data from the server
   // empty array as 2nd arg stops fetch from infinite loop
   useEffect(() => {
     axios.get(`/api/homes${window.location.pathname}calendar`)
       .then(({ data }) => {
-        const months = ['December', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'];
-        const monthsWithDates = [];
-        for (let i = 0; i < months.length; i += 1) {
-          monthsWithDates.push(data[0].dates.filter((dt) => dt.month === months[i]));
-        }
-        setDates(monthsWithDates);
-        delete data[0].dates;
         setListing(data[0]);
+        setReservations(data[0].dates);
+        return data[0].dates;
+      })
+      .then((dates) => {
+        const calendar = staticCalendar;
+        for (let i = 0; i < dates.length; i++) {
+          const tempStart = new Date(dates[i].firstDate);
+          const tempEnd = new Date(dates[i].lastDate);
+          const diffInMilliSeconds = Math.abs(tempEnd - tempStart) / 1000;
+          const days = Math.floor(diffInMilliSeconds / 86400);
+          const startRange = tempStart.getDate();
+          let month;
+          if (tempStart.getMonth() === 11) {
+            month = 0;
+          } else {
+            month = tempStart.getMonth() + 1;
+          }
+          for (let j = startRange; j < startRange + days; j++) {
+            if (j > calendar[month].length) {
+              const newIndex = j - calendar[month].length;
+              let newMonth;
+              if (month === 11) {
+                newMonth = 0;
+              } else {
+                newMonth = month + 1;
+              }
+              calendar[newMonth][newIndex].available = false;
+            } else {
+              calendar[month][j].available = false;
+            }
+          }
+        }
+        setDates(calendar);
       })
       .catch((serverErr) => {
         console.log(serverErr);
