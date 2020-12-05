@@ -3,9 +3,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
+import faker from 'faker';
 import CalendarBody from './CalendarBody';
 import styles from '../../public/styles/calendar.css';
 import staticCalendar from '../../generateStaticCalendar.js';
+
+
 
 const Calendar = () => {
   const [listing, setListing] = useState({});
@@ -23,6 +26,7 @@ const Calendar = () => {
       .then(({ data }) => {
         setListing(data[0]);
         setReservations(data[0].dates);
+        console.log(faker.date.future().toString());
         return data[0].dates;
       })
       .then((dates) => {
