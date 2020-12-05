@@ -13,15 +13,40 @@ app.use(parser.json());
 
 app.use('/:id', express.static(PUB_DIR));
 
+// app.get('/api/homes/:id/calendar', (req, res) => {
+//   const { id } = req.params;
+
+//   db.Listing.find({ listing_ID: id }, (err, results) => {
+//     if (err) {
+//       console.log('Failed to fetch info from the database: ', err);
+//       res.sendStatus(500);
+//     } else {
+//       res.send(results);
+//     }
+//   });
+// });
+
 app.get('/api/homes/:id/calendar', (req, res) => {
   const { id } = req.params;
 
-  db.Listing.find({ listing_ID: id }, (err, results) => {
+  const text = 'SELECT * FROM listings WHERE id = $1';
+  const values = [id];
+  db.client.query(text, values, (err, response) => {
     if (err) {
-      console.log('Failed to fetch info from the database: ', err);
-      res.sendStatus(500);
+      console.log(err);
+      res.sendStatus(400);
     } else {
-      res.send(results);
+      let obj = response.rows[0];
+      const text2 = 'SELECT * FROM dates WHERE listing_id = $1';
+      db.client.query(text2, values, (err2, response2) => {
+        if (err2) {
+          console.log(err2);
+          res.sendStatus(400);
+        } else {
+          obj.dates = response2.rows;
+          res.send(obj);
+        }
+      });
     }
   });
 });

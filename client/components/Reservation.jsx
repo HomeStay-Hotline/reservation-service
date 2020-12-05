@@ -12,8 +12,8 @@ const Reservation = (props) => {
   useEffect(() => {
     axios.get(`/api/homes${window.location.pathname}calendar`)
       .then(({ data }) => {
-        delete data[0].dates;
-        setListing(data[0]);
+        // delete data[0].dates;
+        setListing(data);
       })
       .catch((err) => {
         console.log(err);
