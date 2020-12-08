@@ -13,11 +13,11 @@ const createDates = (index) => {
   while (firstDate.getMonth() >= 10) {
     firstDate = faker.date.future();
   }
-//   const strArr = firstDate.toString().split(' ');
-//   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-//   const tempString = `${strArr[3]}-${months.indexOf(strArr[1]) + 1}-${strArr[2]}`;
-//   firstDate = new Date(tempString);
-//   console.log(firstDate);
+  //   const strArr = firstDate.toString().split(' ');
+  //   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  //   const tempString = `${strArr[3]}-${months.indexOf(strArr[1]) + 1}-${strArr[2]}`;
+  //   firstDate = new Date(tempString);
+  //   console.log(firstDate);
   const range = Math.floor(Math.random() * 5) + 5;
   const lastDate = new Date();
   lastDate.setFullYear(firstDate.getFullYear());

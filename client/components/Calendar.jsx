@@ -3,12 +3,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKeyboard } from '@fortawesome/free-solid-svg-icons';
-import faker from 'faker';
 import CalendarBody from './CalendarBody';
 import styles from '../../public/styles/calendar.css';
 import staticCalendar from '../../generateStaticCalendar.js';
-
-
 
 const Calendar = () => {
   const [listing, setListing] = useState({});
@@ -17,17 +14,22 @@ const Calendar = () => {
   const [checkInClicked, setCheckInClicked] = useState(false);
   const [checkOutDate, setCheckOutDate] = useState({});
   const [checkOutClicked, setCheckOutClicked] = useState(false);
-  const [reservations, setReservations] = useState([]);
 
   // fetch dates data from the server
   // empty array as 2nd arg stops fetch from infinite loop
   useEffect(() => {
     axios.get(`/api/homes${window.location.pathname}calendar`)
       .then(({ data }) => {
-        setListing(data[0]);
-        setReservations(data[0].dates);
-        console.log(faker.date.future().toString());
-        return data[0].dates;
+        console.log(data);
+        setListing(data);
+        let reserveDates = [];
+        for (var i = 0; i < data.dates.length; i++) {
+          let temp = {};
+          temp.firstDate = new Date(data.dates[i].firstdate);
+          temp.lastDate = new Date(data.dates[i].lastdate);
+          reserveDates.push(temp);
+        }
+        return reserveDates;
       })
       .then((dates) => {
         const calendar = staticCalendar;
@@ -43,7 +45,7 @@ const Calendar = () => {
           } else {
             month = tempStart.getMonth() + 1;
           }
-          for (let j = startRange; j < startRange + days; j++) {
+          for (let j = startRange; j < startRange + days - 1; j++) {
             if (j > calendar[month].length) {
               const newIndex = j - calendar[month].length;
               let newMonth;

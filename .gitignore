@@ -4,3 +4,4 @@ coverage
 *.pem
 posts.csv
 dates.csv
+listings.jsonl
