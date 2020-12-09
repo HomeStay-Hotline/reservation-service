@@ -45,7 +45,7 @@ const Calendar = () => {
           } else {
             month = tempStart.getMonth() + 1;
           }
-          for (let j = startRange; j < startRange + days - 1; j++) {
+          for (let j = startRange - 1; j < startRange + days - 1; j++) {
             if (j > calendar[month].length) {
               const newIndex = j - calendar[month].length;
               let newMonth;

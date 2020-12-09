@@ -29,24 +29,30 @@ app.use('/:id', express.static(PUB_DIR));
 app.get('/api/homes/:id/calendar', (req, res) => {
   const { id } = req.params;
 
-  const text = 'SELECT * FROM listings WHERE id = $1';
+  const text = 'select * from listings inner join dates on dates.listing_id = listings.id where listings.id = $1';
   const values = [id];
   db.client.query(text, values, (err, response) => {
     if (err) {
       console.log(err);
       res.sendStatus(400);
     } else {
-      let obj = response.rows[0];
-      const text2 = 'SELECT * FROM dates WHERE listing_id = $1';
-      db.client.query(text2, values, (err2, response2) => {
-        if (err2) {
-          console.log(err2);
-          res.sendStatus(400);
-        } else {
-          obj.dates = response2.rows;
-          res.send(obj);
-        }
-      });
+      const obj = {};
+      const listing = response.rows[0];
+      obj.id = listing.listing_id;
+      obj.name = listing.name;
+      obj.maxGuests = listing.maxguests;
+      obj.minDays = listing.mindays;
+      obj.rate = listing.rate;
+      obj.cleaningFee = listing.cleaningfee;
+      obj.serviceFee = listing.servicefee;
+      obj.dates = [];
+      for (let i = 0; i < response.rows.length; i++) {
+        let temp = {};
+        temp.firstdate = response.rows[i].firstdate;
+        temp.lastdate = response.rows[i].lastdate;
+        obj.dates.push(temp);
+      }
+      res.send(obj);
     }
   });
 });
