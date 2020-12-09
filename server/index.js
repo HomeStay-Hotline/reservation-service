@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const parser = require('body-parser');
 const path = require('path');
 const db = require('../db/index');
 
@@ -8,8 +7,9 @@ const app = express();
 const port = 3000;
 const PUB_DIR = path.resolve(__dirname, '..', 'public');
 
-app.use(morgan('dev'));
-app.use(parser.json());
+// take morgan out for stress testing
+// app.use(morgan('dev'));
+// app.use(parser.json());
 
 app.use('/:id', express.static(PUB_DIR));
 
@@ -45,13 +45,7 @@ app.get('/api/homes/:id/calendar', (req, res) => {
       obj.rate = listing.rate;
       obj.cleaningFee = listing.cleaningfee;
       obj.serviceFee = listing.servicefee;
-      obj.dates = [];
-      for (let i = 0; i < response.rows.length; i++) {
-        let temp = {};
-        temp.firstdate = response.rows[i].firstdate;
-        temp.lastdate = response.rows[i].lastdate;
-        obj.dates.push(temp);
-      }
+      obj.dates = response.rows;
       res.send(obj);
     }
   });
