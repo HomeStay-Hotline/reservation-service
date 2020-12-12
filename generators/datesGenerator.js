@@ -35,7 +35,7 @@ const startWriting = (writeStream, encoding, done) => {
     do {
       i--;
       j++;
-      for (let k = 0; k < Math.floor(Math.random() * 6); k++) {
+      for (let k = 1; k < Math.floor(Math.random() * 6) + 1; k++) {
         const reserve = createDates(j);
         if (i === 0) {
           writeStream.write(reserve, encoding, done);

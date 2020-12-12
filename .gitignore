@@ -5,3 +5,4 @@ coverage
 posts.csv
 dates.csv
 listings.jsonl
+newrelic_agent.log
